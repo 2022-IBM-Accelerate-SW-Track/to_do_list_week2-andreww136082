@@ -22,15 +22,16 @@ class Home extends Component {
     todo.id = Math.random();
     // Create a array that contains the current array and the new todo item
     let new_list = [...this.state.todos, todo];
-    if(new_list.find(element => element === todo) = undefined)
+    if(this.state.todos.find(item => item.content === todo.content))
+    {
+      return;
+    }
+    else 
     {
     // Update the local state with the new array.
     this.setState({
       todos: new_list,
-    });}
-    else 
-    {
-      return;
+    });
     }
   };
   //deleteToDo removes an item from todo list once it is complete, which is indicated by user clicking on checkbox button
@@ -46,12 +47,8 @@ class Home extends Component {
     return (
       <div className="Home">
         <h1>Todo's </h1>
-        {/* When passing the AddTodo component, addTodo is a prop that is used in the 
-        AddTodo.js file when handling the submit */}
-        <AddTodo addTodo={this.addTodo} deleteTodo = {this.deleteTodo} />
-        {/* When returning the Todos component, todos is a prop passed to the todos.js file
-         to format and render the current todo list state */}
-        <Todos todos={this.state.todos} />
+        <AddTodo addTodo={this.addTodo} />
+        <Todos todos={this.state.todos} deleteTodo = {this.deleteTodo}/>
       </div>
     );
   }
